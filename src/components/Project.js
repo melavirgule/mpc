@@ -13,10 +13,12 @@ import { homeStyle } from "../Styles/home";
 import * as DocumentPicker from "expo-document-picker";
 import * as MediaLibrary from "expo-media-library";
 // import DisplayDocs from "./DisplayDocs";
+// import MediaSelection from "./MediaSelection";
 import { AssetsSelector } from 'expo-images-picker';
 
 import { MediaType } from "expo-media-library";
 import { Ionicons } from '@expo/vector-icons';
+import { TouchableOpacity } from "react-native-gesture-handler";
 // import { AntDesign } from '@expo/vector-icons';
 
 
@@ -51,18 +53,22 @@ const Projects = () => {
         return
       }
     }
-
-    let pickerResult = await DocumentPicker.getDocumentAsync({
-      type: "*/*",
-      multiple: true,
-      copyToCacheDirectory: true,
-    });
-    if (pickerResult.type === "cancel") {
-      return;
+    if (Platform.OS === 'web') {
+      let pickerResult = await DocumentPicker.getDocumentAsync({
+        type: "*/*",
+        multiple: true,
+        copyToCacheDirectory: true,
+      });
+      if (pickerResult.type === "cancel") {
+        return;
+      }
+      console.log(pickerResult);
+      setSelectedDocs({ localUri: pickerResult.uri });
     }
-    console.log(pickerResult);
-    setSelectedDocs({ localUri: pickerResult.uri });
-  
+
+    // if (Platform.OS !== 'web') {
+
+    // }
   }
 
   //     //     // setSelectedDocs({
@@ -126,7 +132,51 @@ const Projects = () => {
   // };
 
 
+  // const handlePickDocsMobile = async () => {
+  //   if (Platform.OS !== 'web') {
+  //     const { status } = await MediaLibrary.requestPermissionsAsync();
+  //     if (status !== 'granted') {
+  //       alert("Désolé, la permission est nécessaire pour accéder à la galerie");
+  //       return
+  //     } else {
+  //       return (
+  //         <View>
+  //           <AssetsSelector
+  //             Settings={widgetSettings}
+  //             Errors={widgetErrors}
+  //             Styles={widgetStyles}
+  //             Navigator={widgetNavigator}
+  //           />
+  //         </View>
+  //       )
+  //     }
+  //   }
+  // }
+  const handlePickDocsMobile = async () => {
+    if (Platform.OS !== 'web') {
+      const { status } = await MediaLibrary.requestPermissionsAsync();
+      if (status !== 'granted') {
+        alert("Désolé, la permission est nécessaire pour accéder à la galerie");
+        return
+      }
+
+      return(
+        <>
+        {/* <MediaSelection /> */}
+          <AssetsSelector
+            Settings={widgetSettings}
+            Errors={widgetErrors}
+            Styles={widgetStyles}
+            Navigator={widgetNavigator}
+          />
+        </>
+      )
+      
+    }
+  }
+    
   
+
 
   const onSuccess = (data) => {
     Alert.alert('Done', data.length + 'Images selected')
@@ -173,16 +223,16 @@ const Projects = () => {
   };
 
   const _buttonStyle = {
-    backgroundColor: 'orange',
+    backgroundColor: 'purple',
     borderRadius: 5,
   };
 
   const widgetNavigator = useMemo(
     () => ({
       Texts: {
-        finish: 'finish',
-        back: 'back',
-        selected: 'selected',
+        finish: "C'est bon!",
+        back: 'Retour',
+        selected: 'selectionné(e)s',
       },
       midTextColor: 'black',
       minSelection: 1,
@@ -203,7 +253,7 @@ const Projects = () => {
       videoIcon: {
         Component: Ionicons,
         iconName: 'ios-videocam',
-        color: 'tomato',
+        color: 'purple',
         size: 20,
       },
       selectedIcon: {
@@ -240,25 +290,42 @@ const Projects = () => {
           title="Choisissez vos documents"
           onPress={handlePickDocs}
           style={homeStyle.chooseButton}
+        /> : <TouchableOpacity
+            onPress={handlePickDocsMobile}
+            style={homeStyle.chooseButtonMobile}>
+            <Text
+              style={homeStyle.chooseButtonText} >Choisissez vos documents</Text>
+          </TouchableOpacity>
+        }
+
+        {/* {Platform.OS === 'web' ? <Button
+          title="Choisissez vos documents"
+          onPress={handlePickDocs}
+          style={homeStyle.chooseButton}
         /> : <AssetsSelector
           Settings={widgetSettings}
           Errors={widgetErrors}
           Styles={widgetStyles}
           Navigator={widgetNavigator}
-        />}
+        />} */}
+
+
+
+        {/* <MediaSelection /> } */}
+
         {/* <Button
           title="Choisissez vos documents"
-          onPress={handlePickDocs}
-          style={homeStyle.chooseButton}
+          onPress={handlePickDocsMobile}
+          style={homeStyle.chooseButtonMobile}
         /> */}
 
 
         {/* {selectedDocsArray !== null ? ( */}
-          {selectedDocs !== null ? (
-            <DisplayPickedDocs />
-          ) : (
-            <Text>Vous n'avez pas sélectionné de documents</Text>
-          )}
+        {selectedDocs !== null ? (
+          <DisplayPickedDocs />
+        ) : (
+          <Text>Vous n'avez pas sélectionné de documents</Text>
+        )}
         {/* <DisplayPickedDocs/> */}
 
 
@@ -266,7 +333,7 @@ const Projects = () => {
         {/* <Button
             title="Choisissez vos documents"
             onPress={handlePickDocs}
-            style={homeStyle.chooseButton}
+            style={homeStyle.chooseButtonMobile}
           /> */}
 
         {/* <AssetsSelector

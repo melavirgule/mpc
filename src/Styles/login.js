@@ -62,13 +62,15 @@ export const loginStyles = StyleSheet.create ({
         borderBottomWidth: 2,
         borderColor: '#4D36B7',
 
-        // backgroundColor: '#ffffff',
+        backgroundColor: '#ACC4F2',
         paddingLeft: 15,
         paddingRight: 20,
         // borderBottomColor: 'none',
         // borderBottomWidth: 0,
     },
-
+    eyesIcons: {
+        marginLeft: -25,
+    },
     loginButton: {
         width: 150,
         height: 50,

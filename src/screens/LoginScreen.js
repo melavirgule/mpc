@@ -4,10 +4,12 @@ import { loginStyles } from '../Styles/login';
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { authentication } from '../../firebase';
 // import { withNavigation } from 'react-navigation';
+import { Ionicons } from '@expo/vector-icons';
 
 
 
-const LoginScreen = ({navigation}) => {
+
+const LoginScreen = ({ navigation }) => {
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,31 +18,32 @@ const LoginScreen = ({navigation}) => {
     const [isSelected, setSelected] = useState(false);
     const toggleCheckbox = () => setSelected(!isSelected);
 
+
     const signInUser = () => {
         signInWithEmailAndPassword(authentication, email, password)
-        .then((res) => {
-          console.log(res);
-          setIsSignedIn(true);
-            handleLogin();
-        // rajouter props en props de signInUser
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("Vérifiez votre email et votre mot de passe")
-        })
-      }
-    
-      const SignOutUser = () => {
+            .then((res) => {
+                console.log(res);
+                setIsSignedIn(true);
+                handleLogin();
+
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("Vérifiez votre email et votre mot de passe")
+            })
+    }
+
+    const SignOutUser = () => {
         signOut(authentication)
-        .then((res) => {
-          console.log(res);
-          setIsSignedIn(false);
-        })
-        .catch((err) =>{
-          console.log(err)
-        })
-      }
-    
+            .then((res) => {
+                console.log(res);
+                setIsSignedIn(false);
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
 
 
     function handleChange(text, eventName) {
@@ -49,7 +52,7 @@ const LoginScreen = ({navigation}) => {
         setValues(prev => {
             return {
                 ...prev,
-                [eventName] : text
+                [eventName]: text
             }
         })
     }
@@ -58,7 +61,10 @@ const LoginScreen = ({navigation}) => {
 
         // const isUserLoggedIn = props.isUserLoggedIn;
         // if (isUserLoggedIn) {
-        navigation.navigate("HomeScreen", { screen: "HomeScreen" });
+        // navigation.navigate("HomeScreen", { screen: "HomeScreen" });
+
+        //Redirection temporaire vers RegisterUserScreen
+        navigation.navigate("RegisterUserScreen", { screen: "RegisterUserScreen" });
         // } else {
         //     return <Text>Veuillez vous connecter svp</Text>
         // }
@@ -87,11 +93,8 @@ const LoginScreen = ({navigation}) => {
                     <View style={loginStyles.textInputContainer}>
                         <TextInput
                             style={loginStyles.textInput}
-                            placeholder='Email' value={email} 
-                            onChangeText={text=>setEmail(text)}
-                      
-                            // onChangeText={text => handleChange(text, "email")}
-                            // placeholder="Identifiant"
+                            placeholder='Email' value={email}
+                            onChangeText={text => setEmail(text)}
                             placeholderTextColor="white"
                         // textAlign={"center"}
                         />
@@ -101,36 +104,50 @@ const LoginScreen = ({navigation}) => {
                     <View style={loginStyles.textInputContainer}>
                         <TextInput
                             style={loginStyles.textInput}
-                            placeholder='Password' zvalue={password} 
-                            onChangeText={text=>setPassword(text)}
-                      
-                            // onChangeText={text => handleChange(text, "pwd")}
-                            // placeholder="Mot de passe"
+                            placeholder='Mot de passe' value={password}
+                            onChangeText={text => setPassword(text)}
                             placeholderTextColor="white"
                             // textAlign={"center"}
                             secureTextEntry={isSecureEntry}
+                            autoCorrect={false}
                         />
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                             onPress={() => {
                                 setIsSecureEntry((prev) => !prev)
                             }}
                         >{isSecureEntry ? <Text>Show</Text> : <Text>Hide</Text>}
+                        </TouchableOpacity> */}
+                        <TouchableOpacity
+                            style={loginStyles.eyesIcons}
+                            onPress={() => {
+                                setIsSecureEntry((prev) => !prev)
+                            }}
+                        >{isSecureEntry ? <Ionicons name="eye-outline" size={22} color={'#4D36B7'} />
+                            : <Ionicons name='eye-off-outline' size={22} color={'#4D36B7'} />}
                         </TouchableOpacity>
                     </View>
 
 
-                    <Button 
-                    title={'Se Connecter'}
-                    onPress={signInUser}
-                    style={loginStyles.loginButton}
-                    />
+                    {/* <Button
+                        title={'Se Connecter'}
+                        onPress={signInUser}
+                        style={loginStyles.loginButton}
+                    /> */}
+
+                    <TouchableOpacity
+                        onPress={signInUser}
+                        style={loginStyles.loginButton}>
+                        <Text
+                        style={loginStyles.loginButtonText}
+                        >Se connecter</Text>
+                    </TouchableOpacity>
 
                     {/* <TouchableOpacity
                         onPress={handleLogin}
                         style={[loginStyles.loginButton, loginStyles.loginButtonOutline]}>
                         <Text style={loginStyles.loginButtonText}>Se Connecter</Text>
                     </TouchableOpacity> */}
-                    
+
                     {/* <TouchableOpacity
                         onPress={handleSignUp}
                         style={[loginStyles.loginButton, loginStyles.loginButtonOutline]}>

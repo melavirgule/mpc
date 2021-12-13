@@ -12,13 +12,13 @@ export default function HomeScreen({ navigation }) {
 
     return(
         <SafeAreaView>
-            <ScrollView>
-                <View>
+            {/* <ScrollView> */}
+                {/* <View> */}
                     <Text> Bonjour, {firstName + '' + lastName}</Text>
                     <Text> Réalisation n°{numberOfProject}</Text>
                     <Projects/>
-                </View>
-            </ScrollView>
+                {/* </View> */}
+            {/* </ScrollView> */}
         </SafeAreaView>
     )
 }
