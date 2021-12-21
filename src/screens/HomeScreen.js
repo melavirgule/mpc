@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { ScrollView, Text, View } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Projects from "../components/Project"
+import SecondProjects from "../components/Projects2";
 
 
 export default function HomeScreen({ navigation }) {
@@ -12,13 +14,16 @@ export default function HomeScreen({ navigation }) {
 
     return(
         <SafeAreaView>
-            {/* <ScrollView> */}
+            <ScrollView>
+            {/* <FlatList> */}
                 {/* <View> */}
-                    <Text> Bonjour, {firstName + '' + lastName}</Text>
+                    <Text> Bonjour, {firstName + ' ' + lastName}</Text>
                     <Text> Réalisation n°{numberOfProject}</Text>
                     <Projects/>
+                    <SecondProjects/>
                 {/* </View> */}
-            {/* </ScrollView> */}
+            {/* </FlatList> */}
+            </ScrollView>
         </SafeAreaView>
     )
 }

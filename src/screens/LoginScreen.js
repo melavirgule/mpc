@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import { Button, Image, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Button, Image, KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
 import { loginStyles } from '../Styles/login';
+import { globalStyles } from '../Styles/global';
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { authentication } from '../../firebase';
 // import { withNavigation } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-
+import { windowHeight } from '../Styles/dimension';
 
 
 const LoginScreen = ({ navigation }) => {
@@ -17,6 +20,8 @@ const LoginScreen = ({ navigation }) => {
     const [isSecureEntry, setIsSecureEntry] = useState(true);
     const [isSelected, setSelected] = useState(false);
     const toggleCheckbox = () => setSelected(!isSelected);
+
+
 
 
     const signInUser = () => {
@@ -61,10 +66,10 @@ const LoginScreen = ({ navigation }) => {
 
         // const isUserLoggedIn = props.isUserLoggedIn;
         // if (isUserLoggedIn) {
-        // navigation.navigate("HomeScreen", { screen: "HomeScreen" });
+        navigation.navigate("HomeScreen", { screen: "HomeScreen" });
 
         //Redirection temporaire vers RegisterUserScreen
-        navigation.navigate("RegisterUserScreen", { screen: "RegisterUserScreen" });
+        // navigation.navigate("RegisterUserScreen", { screen: "RegisterUserScreen" });
         // } else {
         //     return <Text>Veuillez vous connecter svp</Text>
         // }
@@ -78,7 +83,11 @@ const LoginScreen = ({ navigation }) => {
 
 
     return (
-        <KeyboardAvoidingView style={loginStyles.mainContainer} behavior="padding">
+        <KeyboardAvoidingView style={loginStyles.mainContainer} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+            {/* <KeyboardAvoidingView style={loginStyles.mainContainer}  behavior={Platform.OS === "ios" ? "padding" : (Platform.OS === "web" ? "windowHeight" : "height")}> */}
+
+
+
             <SafeAreaView style={loginStyles.container}>
                 <View style={loginStyles.loginContainerHeader}>
                     <Image
@@ -92,18 +101,19 @@ const LoginScreen = ({ navigation }) => {
                 <View style={loginStyles.loginContainerFooter}>
                     <View style={loginStyles.textInputContainer}>
                         <TextInput
-                            style={loginStyles.textInput}
+                            style={[globalStyles.textInput, loginStyles.textInput]}
                             placeholder='Email' value={email}
                             onChangeText={text => setEmail(text)}
                             placeholderTextColor="white"
                         // textAlign={"center"}
                         />
                         {/* <UserOutlined style={{ fontSize: '16px', color: '#08c', marginLeft: '-25px' }} /> */}
+
                     </View>
 
                     <View style={loginStyles.textInputContainer}>
                         <TextInput
-                            style={loginStyles.textInput}
+                            style={[globalStyles.textInput, loginStyles.passInput]}
                             placeholder='Mot de passe' value={password}
                             onChangeText={text => setPassword(text)}
                             placeholderTextColor="white"
@@ -111,6 +121,7 @@ const LoginScreen = ({ navigation }) => {
                             secureTextEntry={isSecureEntry}
                             autoCorrect={false}
                         />
+
                         {/* <TouchableOpacity
                             onPress={() => {
                                 setIsSecureEntry((prev) => !prev)
@@ -136,9 +147,9 @@ const LoginScreen = ({ navigation }) => {
 
                     <TouchableOpacity
                         onPress={signInUser}
-                        style={loginStyles.loginButton}>
+                        style={[globalStyles.btn, loginStyles.loginButton]}>
                         <Text
-                        style={loginStyles.loginButtonText}
+                            style={[loginStyles.loginButtonText, globalStyles.btnText]}
                         >Se connecter</Text>
                     </TouchableOpacity>
 
@@ -156,6 +167,7 @@ const LoginScreen = ({ navigation }) => {
 
 
                 </View>
+
             </SafeAreaView>
         </KeyboardAvoidingView>
     )

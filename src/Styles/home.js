@@ -4,7 +4,10 @@ export const homeStyle = StyleSheet.create({
     textarea : {
         // flex: 3,
         margin: 20,
-        backgroundColor: 'turquoise',
+        // backgroundColor: 'turquoise',
+
+        borderColor: 'turquoise',
+        borderWidth: 2,
 
         // width: 200,
         minWidth: 300,
@@ -12,13 +15,13 @@ export const homeStyle = StyleSheet.create({
     },
     chooseButton: {
         margin: 20,
+        backgroundColor: '#553ACF',
+
     },
     chooseButtonMobile: {
-        width: 160,
-        height: 60,
         margin: 20,
         backgroundColor: 'purple',
-        borderRadius: 5,
+
     },
     chooseButtonText: {
         width: 160,

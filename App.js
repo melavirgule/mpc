@@ -4,11 +4,20 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import AppStack from './src/routes/AppStack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useFonts } from 'expo-font';
 
 
 
 
 export default function App() {
+
+  const [loaded] = useFonts({
+    Montserrat: require('./src/assets/fonts/Montserrat-Light.ttf')
+  });
+
+  if (!loaded) {
+    return null;
+  }
 
 
   return (

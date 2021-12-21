@@ -1,7 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { AssetsSelector } from "expo-images-picker";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { useMemo } from "react";
+import { MediaType } from "expo-media-library";
+
+
+// https://stackoverflow.com/questions/68775282/how-can-i-display-an-array-of-images-after-get-the-urls-react-native
 
 const MediaSelection = () => {
     const onSuccess = (data) => {
@@ -36,8 +40,9 @@ const MediaSelection = () => {
 
     const widgetResize = useMemo(
         () => ({
-            width: 50,
-            compress: 0.7,
+            // width: 50,
+            compress: 1, 
+            // compress: 0.7  ou 0.9,
             base64: false,
             saveTo: 'jpeg',
         }),
@@ -62,11 +67,13 @@ const MediaSelection = () => {
             },
             midTextColor: 'black',
             minSelection: 1,
+            maxSelection: 9,
             buttonTextStyle: _textStyle,
             buttonStyle: _buttonStyle,
-            onBack: () => { },
-            onSuccess: (e) => onSuccess(e),
-        }),
+            // onBack: () => { },
+            // onSuccess: (e) => onSuccess(e),
+            onBack: () => navigation.goBack(),
+            onSuccess: (function (data) { return onSuccess(data); })}),
         []
     );
 
@@ -103,6 +110,17 @@ const MediaSelection = () => {
                 Navigator={widgetNavigator}
                 Resize={widgetResize}
             />
+
+            {/* <TouchableOpacity
+            // onPress={}
+            style={[globalStyles.btn, homeStyle.chooseButton]}>
+            <Text style={globalStyles.btnText}>Envoyez vos documents</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+            // onPress={}
+            style={[globalStyles.btn, homeStyle.chooseButton]}>
+            <Text style={globalStyles.btnText}>Envoyez vos documents</Text>
+            </TouchableOpacity> */}
         </>
 
     )

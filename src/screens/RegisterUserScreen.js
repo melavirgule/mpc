@@ -16,7 +16,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { authentication } from "../../firebase";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { registerStyles } from "../Styles/register";
-
+import { globalStyles } from "../Styles/global";
+import UpdateUserProfileScreen from "../components/UpdateProfile";
 
 
 // export default function RegisterScreen() {
@@ -35,6 +36,7 @@ const RegisterUserScreen = ({ navigation }) => {
                 console.log(res);
                 setIsSignedIn(true);
                 navigation.navigate("UpdateUserProfileScreen", { screen: "UpdateUserProfileScreen" })
+                
             })
             .catch((err) => {
                 console.log(err);
@@ -52,19 +54,26 @@ const RegisterUserScreen = ({ navigation }) => {
                 <TextInput
                     placeholder='Email' value={email}
                     onChangeText={text => setEmail(text)} 
-                    style={registerStyles.textInput}
+                    style={globalStyles.textInput}
                     />
                 <TextInput
                     placeholder='Password' value={password}
                     onChangeText={text => setPassword(text)}
                     secureTextEntry={true} 
-                    style={registerStyles.textInput}
+                    style={globalStyles.textInput}
                     />
-                <Button
+                {/* <Button
                     title={'Register'}
                     onPress={RegisterUser}
                     style={registerStyles.textInput}
-                />
+                /> */}
+                <TouchableOpacity
+                    onPress={RegisterUser}
+                    style={[globalStyles.btn, registerStyles.registerBtn]}
+                >
+                <Text
+                    style={globalStyles.btnText}>Enregistrer</Text>
+                </TouchableOpacity>
 
 
                 <StatusBar style="auto" />

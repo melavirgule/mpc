@@ -34,10 +34,10 @@ const AppStack = () => {
             component={RegisterUserScreen}
             />
 
-            <Stack.Screen
+            {/* <Stack.Screen
             name="UpdateUserProfileScreen"
             component={UpdateUserProfileScreen}
-            />
+            /> */}
 
             {/* <Stack.Screen
             name="ThankyouScreen"

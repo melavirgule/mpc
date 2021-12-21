@@ -1,10 +1,14 @@
-import { Button, Text, TextInput, TouchableOpacity } from "react-native";
 import React, { useState} from "react";
+import { Button, Stylesheet, Text, TextInput } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { updateProfile, getAuth, sendEmailVerification } from "@firebase/auth";
 import { authentication } from "../../firebase";
-import { registerStyles } from "../Styles/register";
 import { globalStyles } from "../Styles/global";
+import { registerStyles } from "../Styles/register";
+
+
 
 const UpdateUserProfileScreen = () => {
 
@@ -36,26 +40,21 @@ const UpdateUserProfileScreen = () => {
             Completez le profil de votre utilisateur</Text>
 
                 <TextInput
-                    placeholder='name' value={name}
+                    placeholder='nom' value={name}
                     onChangeText={text => setName(text)}
                     style={globalStyles.textInput} />
                 <TextInput
                     placeholder='photo' value={photo}
                     onChangeText={text => setPhoto(text)}
-                    style={globalStyles.textInput}
-                />
-                {/* <Button
-                    title={'Enregistrer le profil'}
-                    onPress={UpdateUserProfile}
-                /> */}
+                    style={globalStyles.textInput} />
 
                 <TouchableOpacity
                     onPress={UpdateUserProfile}
-                    style={[globalStyles.btn, registerStyles.registerBtn]}
-                >
+                    style={[globalStyles.btn, registerStyles.registerBtn]}>
                     <Text
-                        style={globalStyles.btnText}
-                    >Enregistrer le profil</Text>
+                        style={globalStyles.btnText}>
+                        Enregistrer le profil
+                    </Text>
                 </TouchableOpacity>
 
         </SafeAreaProvider>

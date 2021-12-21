@@ -1,8 +1,11 @@
 import { StyleSheet } from "react-native";
-import { windowWidth } from "./dimension";
+import { windowHeight, windowWidth } from "./dimension";
+
+
 
 export const loginStyles = StyleSheet.create ({
     mainContainer: {
+        height: windowHeight,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -15,6 +18,7 @@ export const loginStyles = StyleSheet.create ({
     },
     loginContainerHeader: {
         flex: 1,
+        marginTop: 30,
         marginBottom: 20,
     },
     loginLogo: {
@@ -33,40 +37,18 @@ export const loginStyles = StyleSheet.create ({
     textInputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    textInput: {
+        width: 250,
+        marginTop: 50,
+        marginBottom: 20,
 
     },
-    // loginIcon:{
-    //     color: 'white',
-    // }, 
-    // textInputContainer: {
-    //     flexDirection: 'row',
-    //     alignItems: 'center',
-    //     justifyContent: 'space-between',
-    //     width: 260,
-    //     height: 50,
-    //     // backgroundColor: '#ffffff',
-    //     // borderWidth: 2,
-    //     // borderColor: '#42d694',
-    //     margin: 20,
-    //     paddingRight: 20,
-    //     paddingLeft: 20,
-        
-    // },
-    textInput: {
-        width: 200,
-        height: 50,
-        textAlign: 'left',
-        marginTop: 15,
-        marginBottom: 25,
-        // borderRadius: 10,
-        borderBottomWidth: 2,
-        borderColor: '#4D36B7',
+    passInput:{
+        width: 250,
+    //     marginRight: -20,
+    // marginBottom: 100,
 
-        backgroundColor: '#ACC4F2',
-        paddingLeft: 15,
-        paddingRight: 20,
-        // borderBottomColor: 'none',
-        // borderBottomWidth: 0,
     },
     eyesIcons: {
         marginLeft: -25,
@@ -75,7 +57,8 @@ export const loginStyles = StyleSheet.create ({
         width: 150,
         height: 50,
         maxHeight: 60,
-        margin: 100,
+        marginTop: 50,
+        // margin: 100,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#4D36B7',
@@ -85,6 +68,7 @@ export const loginStyles = StyleSheet.create ({
     },
     loginButtonText: {
         color: 'white',
+        fontFamily: 'Montserrat',
     },
     checkboxContainer: {
         flex: 1,
