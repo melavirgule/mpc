@@ -13,6 +13,10 @@ export const globalStyles = StyleSheet.create({
         alignItems: 'center',
 
     },
+    logOutIcon:{
+        textAlign: 'right',
+        marginRight: 20,
+    },
     textInput: {
         width: 200,
         height: 50,
@@ -36,12 +40,12 @@ export const globalStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        borderRadius: 10,
+        borderRadius: 5,
     },
     btnText: {
         color: 'white',
-        fontFamily: 'Montserrat',
-        
+        fontFamily: 'MontserratNormal',
+        textAlign: 'center',
     },
 
 })

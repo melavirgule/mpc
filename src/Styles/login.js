@@ -51,19 +51,16 @@ export const loginStyles = StyleSheet.create ({
 
     },
     eyesIcons: {
-        marginLeft: -25,
+        marginLeft: -21,
     },
     loginButton: {
         width: 150,
         height: 50,
         maxHeight: 60,
         marginTop: 50,
-        // margin: 100,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#4D36B7',
-        // backgroundColor: 'purple',
-        // backgroundColor: 'rgb(64, 48, 142, 0.5)',
         borderRadius: 10,
     },
     loginButtonText: {
@@ -75,9 +72,7 @@ export const loginStyles = StyleSheet.create ({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: '#ecf0f1',
         padding: 8,
-    
     },
     checkbox: {
         width: 24,
@@ -98,5 +93,4 @@ export const loginStyles = StyleSheet.create ({
         textAlign: 'center',
         color: '#4D36B7'
     },
-    
 })

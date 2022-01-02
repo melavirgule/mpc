@@ -1,9 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { AssetsSelector } from "expo-images-picker";
-import React from "react";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { MediaType } from "expo-media-library";
-
+import { useNavigation } from "@react-navigation/native";
 
 // https://stackoverflow.com/questions/68775282/how-can-i-display-an-array-of-images-after-get-the-urls-react-native
 
@@ -13,9 +12,11 @@ const ForceInset = {
 };
 
 const MediaSelection = () => {
+    const navigation = useNavigation();
+
     const onSuccess = function (data)  {
-        // Alert.alert('Done', data.length + 'Images selected')
-        Alert.alert('Selected items are', JSON.stringify(data))
+        Alert.alert('Done', data.length + 'Images selected')
+        // Alert.alert('Les documents séléctionnés sont', JSON.stringify(data))
     };
 
     const widgetErrors = useMemo(
@@ -34,7 +35,7 @@ const MediaSelection = () => {
     const widgetSettings = useMemo(
         () => ({
             getImageMetaData: true, // true might perform slower results but gives meta data and absolute path for ios users
-            initialLoad: 100,
+            initialLoad: 50,
             assetsType: [MediaType.photo, MediaType.video],
             minSelection: 1,
             maxSelection: 9,

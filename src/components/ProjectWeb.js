@@ -16,9 +16,11 @@ import {
   View,
   LogBox,
 } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import * as Clipboard from "expo-clipboard";
 import uuid from "uuid";
-
+import { globalStyles } from "../Styles/global";
+import { homeStyle } from "../Styles/home";
 
 // Editing this file with fast refresh will reinitialize the app on every refresh, let's not do that
 if (!getApps().length) {
@@ -28,7 +30,7 @@ if (!getApps().length) {
 // Firebase sets some timeers for a long period, which will trigger some warnings. Let's turn that off for this example
 LogBox.ignoreLogs([`Setting a timer for a long period`]);
 
-export default class SecondProject extends React.Component {
+export default class AnotherProject extends React.Component {
   state = {
     image: null,
     uploading: false,
@@ -36,11 +38,12 @@ export default class SecondProject extends React.Component {
 
   async componentDidMount() {
     if (Platform.OS !== "web") {
-      const {
-        status,
-      } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== "granted") {
-        alert("Sorry, we need camera roll permissions to make this work!");
+        alert(
+          "Désolé, nous avons besoin de votre permission pour accéder à votre galerie"
+        );
       }
     }
   }
@@ -59,16 +62,23 @@ export default class SecondProject extends React.Component {
               marginHorizontal: 15,
             }}
           >
-            Voici les images que vous avez sélectionné
+            Voici les images que vous avez sélectionnées
           </Text>
         )}
 
-        <Button
+        {/* <Button
           onPress={this._pickImage}
           title="Choisissez des images dans votre galerie"
-        />
+        /> */}
+        {/* <TouchableOpacity
+          onPress={this._pickImage}
+          style={[globalStyles.btn, homeStyle.chooseButton]}
+        >
+          <Text style={globalStyles.btnText}>
+            Choisissez des images dans votre galerie
+          </Text>
+        </TouchableOpacity> */}
 
-        
         {this._maybeRenderImage()}
         {this._maybeRenderUploadingOverlay()}
 
@@ -148,10 +158,10 @@ export default class SecondProject extends React.Component {
     alert("L'image a été copiée dans le presse papier");
   };
 
-
-
   _pickImage = async () => {
     let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      // allowsMultipleSelection: true,
+      // MediaTypeOptions: "All",
       // allowsEditing: true,
       aspect: [4, 3],
     });
@@ -160,9 +170,6 @@ export default class SecondProject extends React.Component {
 
     this._handleImagePicked(pickerResult);
   };
-
-
-  
 
   _handleImagePicked = async (pickerResult) => {
     try {
@@ -198,7 +205,7 @@ async function uploadImageAsync(uri) {
     xhr.send(null);
   });
 
-  const fileRef = ref(getStorage(), uuid.v4());
+  const fileRef = ref(getStorage(), "photos/" + uuid.v4());
   const result = await uploadBytes(fileRef, blob);
 
   // We're done with the blob, close and release it

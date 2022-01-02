@@ -3,10 +3,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "../screens/LoginScreen";
 import HomeScreen from "../screens/HomeScreen";
+import MediaSelection from "../screens/MediaSelectionScreen";
 import RegisterUserScreen from '../screens/RegisterUserScreen';
 import UpdateUserProfileScreen from '../screens/UpdateUserProfileScreen'
-// import DisclaimerScreen from "../Screens/DisclaimerScreen";
-// import ThankyouScreen from "../Screens/ThankyouScreen";
+import DisclaimerScreen from "../screens/DisclaimerScreen";
+import ThankYouScreen from "../screens/ThankYouScreen";
 
 
 const Stack = createStackNavigator();
@@ -30,26 +31,31 @@ const AppStack = () => {
             />
 
             <Stack.Screen
+            name="MediaSelection"
+            component={MediaSelection}
+            />
+
+            <Stack.Screen
             name="RegisterUserScreen"
             component={RegisterUserScreen}
             />
 
-            {/* <Stack.Screen
+            <Stack.Screen
             name="UpdateUserProfileScreen"
             component={UpdateUserProfileScreen}
-            /> */}
+            />
 
-            {/* <Stack.Screen
-            name="ThankyouScreen"
-            component={ThankyouScreen}
-            options={{headerShown: false}}
-            /> */}
+            <Stack.Screen
+            name="ThankYouScreen"
+            component={ThankYouScreen}
+            options={{headerShown: true}}
+            />
 
-            {/* <Stack.Screen
+            <Stack.Screen
             name="DisclaimerScreen"
             component={DisclaimerScreen}
-            options={{headerShown: false}}
-            /> */}
+            options={{headerShown: true}}
+            />
 
         </Stack.Navigator>
     

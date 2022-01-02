@@ -12,12 +12,15 @@ import { useFonts } from 'expo-font';
 export default function App() {
 
   const [loaded] = useFonts({
-    Montserrat: require('./src/assets/fonts/Montserrat-Light.ttf')
+    Montserrat: require('./src/assets/fonts/Montserrat-Light.ttf'),
+    MontserratNormal: require('./src/assets/fonts/Montserrat-Regular.ttf')
   });
+
 
   if (!loaded) {
     return null;
   }
+
 
 
   return (
