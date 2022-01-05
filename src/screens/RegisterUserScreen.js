@@ -12,38 +12,28 @@ import {
     View,
 } from "react-native";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-
 import { authentication } from "../../firebase";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { registerStyles } from "../Styles/register";
 import { globalStyles } from "../Styles/global";
 import UpdateUserProfileScreen from "../components/UpdateProfile";
 
-
-// export default function RegisterScreen() {
 const RegisterUserScreen = ({ navigation }) => {
-
-    const [name, setName] = useState('');
-    const [pic, setPic] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const [isSignedIn, setIsSignedIn] = useState(false);
+    // const [isSignedIn, setIsSignedIn] = useState(false);
 
     const RegisterUser = (props) => {
         createUserWithEmailAndPassword(authentication, email, password)
             .then((res) => {
                 console.log(res);
-                setIsSignedIn(true);
+                // setIsSignedIn(true);
                 navigation.navigate("UpdateUserProfileScreen", { screen: "UpdateUserProfileScreen" })
-                
             })
             .catch((err) => {
                 console.log(err);
             })
     }
-
-
 
     return (
         <SafeAreaProvider>
@@ -62,11 +52,7 @@ const RegisterUserScreen = ({ navigation }) => {
                     secureTextEntry={true} 
                     style={globalStyles.textInput}
                     />
-                {/* <Button
-                    title={'Register'}
-                    onPress={RegisterUser}
-                    style={registerStyles.textInput}
-                /> */}
+
                 <TouchableOpacity
                     onPress={RegisterUser}
                     style={[globalStyles.btn, registerStyles.registerBtn]}
@@ -75,7 +61,6 @@ const RegisterUserScreen = ({ navigation }) => {
                     style={globalStyles.btnText}>Enregistrer</Text>
                 </TouchableOpacity>
 
-
                 <StatusBar style="auto" />
             </View>
         </SafeAreaProvider>
@@ -83,14 +68,3 @@ const RegisterUserScreen = ({ navigation }) => {
 }
 
 export default RegisterUserScreen;
-
-
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         backgroundColor: "#fff",
-//         alignItems: "center",
-//         justifyContent: "center",
-//     },
-// });

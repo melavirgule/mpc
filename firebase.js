@@ -12,25 +12,8 @@ import { getFirestore } from "firebase/firestore/lite";
 
 
 
-
 // My web app's Firebase configuration
 const firebaseConfig = {
-
-    // apiKey: API_KEY,
-    // authDomain: AUTH_DOMAIN,
-    // projectId: PROJECT_ID,
-    // storageBucket: STORAGE_BUCKET,
-    // messagingSenderId: MESSAGING_SENDER_ID,
-    // appId: APP_ID
-
-    // apiKey: apiKey,
-    // authDomain: authDomain,
-    // projectId: projectId,
-    // storageBucket: storageBucket,
-    // messagingSenderId: messagingSenderId,
-    // appId: appId
-
-
 
   };
 
@@ -38,11 +21,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const authentication = getAuth(app);
 
-// https://firebase.google.com/docs/auth/web/custom-dependencies
-// export const authentication = initializeAuth(app, {
-//   persistence: browserLocalPersistence,
-//   // No popupRedirectResolver defined
-// });
+
 // Initialize services
 export const db = getFirestore(app);
 

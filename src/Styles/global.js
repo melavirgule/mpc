@@ -13,10 +13,14 @@ export const globalStyles = StyleSheet.create({
         alignItems: 'center',
 
     },
-    logOutIcon:{
-        textAlign: 'right',
+    globalIconsContainer: {
+        marginTop: 10,
         marginRight: 20,
+        marginLeft: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
+
     textInput: {
         width: 200,
         height: 50,

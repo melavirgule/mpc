@@ -1,6 +1,5 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-
 import LoginScreen from "../screens/LoginScreen";
 import HomeScreen from "../screens/HomeScreen";
 import MediaSelection from "../screens/MediaSelectionScreen";
@@ -9,14 +8,9 @@ import UpdateUserProfileScreen from '../screens/UpdateUserProfileScreen'
 import DisclaimerScreen from "../screens/DisclaimerScreen";
 import ThankYouScreen from "../screens/ThankYouScreen";
 
-
 const Stack = createStackNavigator();
-
-
 const AppStack = () => {
-
     return(
-
         <Stack.Navigator>
 
             <Stack.Screen
@@ -33,6 +27,7 @@ const AppStack = () => {
             <Stack.Screen
             name="MediaSelection"
             component={MediaSelection}
+            options={{headerShown: false}}
             />
 
             <Stack.Screen
@@ -48,17 +43,13 @@ const AppStack = () => {
             <Stack.Screen
             name="ThankYouScreen"
             component={ThankYouScreen}
-            options={{headerShown: true}}
             />
 
             <Stack.Screen
             name="DisclaimerScreen"
             component={DisclaimerScreen}
-            options={{headerShown: true}}
             />
-
         </Stack.Navigator>
-    
     )
 }
 

@@ -1,17 +1,11 @@
 import React, { useState } from 'react'
-import { Button, Image, KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Image, KeyboardAvoidingView, Platform, SafeAreaView, SafeAreaProvider, StyleSheet, Text, TextInput, View } from 'react-native'
 import { loginStyles } from '../Styles/login';
 import { globalStyles } from '../Styles/global';
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { authentication } from '../../firebase';
-// import { withNavigation } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
-
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
-import { windowHeight } from '../Styles/dimension';
-
 
 
 const LoginScreen = ({ navigation }) => {
@@ -28,7 +22,6 @@ const LoginScreen = ({ navigation }) => {
                 console.log(res);
                 setIsSignedIn(true);
                 handleLogin();
-
             })
             .catch((err) => {
                 console.log(err);
@@ -36,16 +29,26 @@ const LoginScreen = ({ navigation }) => {
             })
     }
 
-    const SignOutUser = () => {
-        signOut(authentication)
-            .then((res) => {
-                console.log(res);
-                setIsSignedIn(false);
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+    const handleLogin = (props) => {
+        navigation.navigate("HomeScreen", { screen: "HomeScreen" });
+        //Redirection temporaire vers RegisterUserScreen
+        // navigation.navigate("RegisterUserScreen", { screen: "RegisterUserScreen" });
+    };
+
+    const handleAdminScreen = (props) => {
+        navigation.navigate("RegisterUserScreen", { screen: "RegisterUserScreen" });
     }
+
+    // const SignOutUser = () => {
+    //     signOut(authentication)
+    //         .then((res) => {
+    //             console.log(res);
+    //             setIsSignedIn(false);
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    // }
 
     function handleChange(text, eventName) {
         // On récup les valeurs précédentes de Value ( cad email + pwd vides grace à ...prev)
@@ -58,30 +61,23 @@ const LoginScreen = ({ navigation }) => {
         })
     }
 
-    const handleLogin = (props) => {
-        navigation.navigate("HomeScreen", { screen: "HomeScreen" });
-
-        //Redirection temporaire vers RegisterUserScreen
-        // navigation.navigate("RegisterUserScreen", { screen: "RegisterUserScreen" });
-    };
-
     //https://www.youtube.com/watch?v=LrzcqnUcTX8&ab_channel=CodingIsOurLife
 
     return (
         <KeyboardAvoidingView style={loginStyles.mainContainer} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-
             <SafeAreaView style={loginStyles.container}>
-                <View style={loginStyles.loginContainerHeader}>
+                <View style={loginStyles.logoContainer}>
                     <Image
-
                         source={require("../assets/smallLogo.png")}
                         resizeMode="center"
                         style={loginStyles.loginLogo}
                     />
                 </View>
-
+                
                 <View style={loginStyles.loginContainerFooter}>
                     <View style={loginStyles.textInputContainer}>
+                    <Ionicons name="person-circle-outline" size={28} color="#4D36B7" style={[loginStyles.loginIcons, loginStyles.idIcon]}/>
+
                         <TextInput
                             style={[globalStyles.textInput, loginStyles.textInput]}
                             placeholder='Email' value={email}
@@ -90,9 +86,19 @@ const LoginScreen = ({ navigation }) => {
                         // textAlign={"center"}
                         />
 
+
                     </View>
 
                     <View style={loginStyles.textInputContainer}>
+
+                    <TouchableOpacity
+                            style={[loginStyles.loginIcons, loginStyles.eyesIcons]}
+                            onPress={() => {
+                                setIsSecureEntry((prev) => !prev)
+                            }}
+                        >{isSecureEntry ? <Ionicons name="eye-outline" size={28} color={'#4D36B7'} />
+                            : <Ionicons name='eye-off-outline' size={28} color={'#4D36B7'} />}
+                        </TouchableOpacity>
                         <TextInput
                             style={[globalStyles.textInput, loginStyles.passInput]}
                             placeholder='Mot de passe' value={password}
@@ -103,14 +109,7 @@ const LoginScreen = ({ navigation }) => {
                             autoCorrect={false}
                         />
 
-                        <TouchableOpacity
-                            style={loginStyles.eyesIcons}
-                            onPress={() => {
-                                setIsSecureEntry((prev) => !prev)
-                            }}
-                         >{isSecureEntry ? <Ionicons name="eye-outline" size={22} color={'#4D36B7'} />
-                            : <Ionicons name='eye-off-outline' size={22} color={'#4D36B7'} />}
-                        </TouchableOpacity>
+
             
                     </View>
 

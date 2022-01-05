@@ -7,8 +7,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 
 
-
-
 export default function App() {
 
   const [loaded] = useFonts({
@@ -16,12 +14,9 @@ export default function App() {
     MontserratNormal: require('./src/assets/fonts/Montserrat-Regular.ttf')
   });
 
-
   if (!loaded) {
     return null;
   }
-
-
 
   return (
     <SafeAreaProvider>
@@ -31,12 +26,3 @@ export default function App() {
     </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

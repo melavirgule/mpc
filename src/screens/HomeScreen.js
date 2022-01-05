@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import Projects from "../components/Project"
-import SecondProjects from "../components/ProjectWeb";
+import ProjectWeb from "../components/ProjectWeb";
 import AddMoreOrSend from "../components/AddMoreOrSend";
 
 import { homeStyle } from "../Styles/home";
@@ -22,32 +22,46 @@ export default function HomeScreen({ navigation }) {
     //         .then((res) => {
     //             console.log(res);
     //             setIsSignedIn(false);
+    //             alert("Vous etes déconnecté")
+    //             handleLogout();
     //         })
     //         .catch((err) => {
     //             console.log(err)
     //         })
     // }
 
+    const handleLogout = (props) => {
+        navigation.navigate("LoginScreen", { screen: "LoginScreen" });
+    };
+
+    const handleRegisterUser = (props) => {
+        navigation.navigate("RegisterUserScreen", { screen: "RegisterUserScreen" });
+    };
+
 
     return(
-        <SafeAreaView>
+        <SafeAreaProvider>
+         {/* <SafeAreaView> */}
             <ScrollView>
-            {/* <FlatList> */}
-                {/* <View> */}
-                <TouchableOpacity
-                    // onPress={SignOutUser}
-                >                    
-                    <Ionicons name="exit-outline" size={24} color="#4D36B7" style={globalStyles.logOutIcon}/>
-                </TouchableOpacity>
+                <View style={globalStyles.globalIconsContainer}>                
+                    <TouchableOpacity
+                        onPress={handleRegisterUser}
+                    >                    
+                        <Ionicons name="settings-outline" size={24} color="#4D36B7"/>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        // onPress={SignOutUser}
+                    >                    
+                        <Ionicons name="exit-outline" size={24} color="#4D36B7"/>
+                    </TouchableOpacity>
+                </View>
 
-
-                    <Text style={homeStyle.title}> Bonjour, {firstName + ' ' + lastName}</Text>
-                    <Projects/>
-                    <SecondProjects/>
-                    <AddMoreOrSend/>
-                {/* </View> */}
-            {/* </FlatList> */}
+                <Text style={homeStyle.title}> Bonjour, {firstName + ' ' + lastName}</Text>
+                <Projects/>
+                <ProjectWeb/>
+                <AddMoreOrSend/>
             </ScrollView>
-        </SafeAreaView>
+         {/* </SafeAreaView> */}
+        </SafeAreaProvider>
     )
 }

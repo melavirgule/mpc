@@ -128,10 +128,10 @@ const Projects = () => {
                 <Text style={globalStyles.btnText}>Choisir</Text>
               </TouchableOpacity>
             )}
+
           </View>
         </View>
 
-        {/* <AddMoreOrSend /> */}
       </SafeAreaView>
     </SafeAreaProvider>
   );

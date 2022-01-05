@@ -14,10 +14,9 @@ const ForceInset = {
 const MediaSelection = () => {
     const navigation = useNavigation();
 
-    const onSuccess = function (data)  {
-        Alert.alert('Done', data.length + 'Images selected')
-        // Alert.alert('Les documents séléctionnés sont', JSON.stringify(data))
-    };
+    const onSuccess = () => {
+        Alert.alert('Done',data.length + 'Images selected')
+      };
 
     const widgetErrors = useMemo(
         () => ({

@@ -16,7 +16,7 @@ export const loginStyles = StyleSheet.create ({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    loginContainerHeader: {
+    logoContainer: {
         flex: 1,
         marginTop: 30,
         marginBottom: 20,
@@ -42,16 +42,25 @@ export const loginStyles = StyleSheet.create ({
         width: 250,
         marginTop: 50,
         marginBottom: 20,
+        marginLeft: -20,
 
     },
     passInput:{
         width: 250,
-    //     marginRight: -20,
-    // marginBottom: 100,
+        marginLeft: -20,
+    },
+    loginIcons: {
+        // marginRight: -20,
+        // marginBottom: 10,
+        // padding: 10,
 
+        marginRight: 30,
+    },
+    idIcon : {
+        marginBottom: -30,
     },
     eyesIcons: {
-        marginLeft: -21,
+        marginBottom: 5,
     },
     loginButton: {
         width: 150,

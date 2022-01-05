@@ -62,7 +62,7 @@ const AddMoreOrSend = () => {
           >
             <Text style={globalStyles.btnText}>Ajouter une réalisation</Text>
           </TouchableOpacity>
-          <Text style={homeStyle.addMoreText}>Oui, S'il vous plaît</Text>
+          <Text style={homeStyle.addMoreText}>Oui, s'il vous plaît</Text>
         </View>
 
         <View style={homeStyle.sendingBtnContainer}>

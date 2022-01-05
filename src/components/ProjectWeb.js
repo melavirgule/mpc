@@ -70,14 +70,14 @@ export default class AnotherProject extends React.Component {
           onPress={this._pickImage}
           title="Choisissez des images dans votre galerie"
         /> */}
-        {/* <TouchableOpacity
+        <TouchableOpacity
           onPress={this._pickImage}
           style={[globalStyles.btn, homeStyle.chooseButton]}
         >
           <Text style={globalStyles.btnText}>
             Choisissez des images dans votre galerie
           </Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
 
         {this._maybeRenderImage()}
         {this._maybeRenderUploadingOverlay()}
